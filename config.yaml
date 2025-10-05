@@ -1,0 +1,64 @@
+# Real-time Neural Analysis System Configuration
+# Edit these parameters according to your experimental setup
+
+# Operation Mode
+simulation_mode: true  # Set to false for real hardware
+
+# SpikeGLX Connection Settings (for production mode)
+sglx_host: "127.0.0.1"  # IP address of SpikeGLX server
+sglx_port: 4142         # Port number for SpikeGLX API
+
+# Network Settings
+udp_ip: "127.0.0.1"
+udp_port: 33433          # UDP port for receiving stimulus events
+
+# Data Acquisition Parameters
+neural_channels: 384    # Number of neural recording channels
+neural_sample_rate: 30000  # Neural data sampling rate (Hz)
+ttl_sample_rate: 10593     # TTL/Digital data sampling rate (Hz)
+ttl_sync_bit: 0         # Bit position for sync signal
+ttl_event_bit: 6        # Bit position for event onset (value 64)
+
+# Synchronization Parameters
+sync_epsilon_ms: 150.0   # Time tolerance for TTL-UDP event matching (milliseconds)
+sync_skew_window_size: 50  # Number of events for dynamic clock skew estimation
+
+# Signal Processing
+downsample_factor: 30   # Downsampling factor (30000 Hz -> 1000 Hz)
+psth_window_ms: [-50, 300]  # PSTH time window relative to stimulus onset
+spike_threshold: -4 # threshold for spike detection
+
+# Memory Management
+ring_buffer_size_mb: 1000  # Size of shared memory ring buffer (MB)
+max_trials_per_category: 1000  # Maximum trials to store per stimulus category
+
+# GUI Settings
+gui_update_interval_ms: 200  # Display refresh rate (milliseconds)
+monitor_update_interval_ms: 200  # System monitor update rate (milliseconds)
+
+# File Paths
+image_info_path: "TextureLOC_info.tsv"  # Path to stimulus metadata file
+save_path: "./data"  # Directory for saving data and logs
+
+# Simulation Parameters (for simulation mode)
+sim_neural_noise_level: 30.0  # Noise level for simulated neural data
+sim_spike_rate_hz: 80.0  # Spike generation rate (Hz)
+sim_sync_rate_hz: 1.0  # Sync signal toggle rate (Hz)
+sim_event_rate_hz: 3.0  # Event onset rate (Hz)
+sim_n_categories: 4  # Number of stimulus categories in simulation
+
+# D-prime Analysis Defaults
+dprime_defaults:
+  contrast_threshold: 0.5
+  time_window_ms: [50, 250]
+  
+# Performance Settings
+performance:
+  worker_processes: 4    # Number of parallel analysis processes
+  queue_max_size: 1000   # Maximum queue size for inter-process communication
+  
+# Logging Settings
+logging:
+  level: "INFO"          # Logging level (DEBUG, INFO, WARNING, ERROR)
+  file_rotation: true    # Enable log file rotation
+  max_log_size_mb: 100   # Maximum log file size before rotation
