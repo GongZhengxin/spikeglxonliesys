@@ -8,7 +8,7 @@ simulation_mode: true  # Set to false for real hardware
 sglx_host: "127.0.0.1"  # IP address of SpikeGLX server
 sglx_port: 4142         # Port number for SpikeGLX API
 
-# Network Settings
+# UDP Network Settings
 udp_ip: "127.0.0.1"
 udp_port: 33433          # UDP port for receiving stimulus events
 
@@ -51,6 +51,37 @@ sim_n_categories: 4  # Number of stimulus categories in simulation
 dprime_defaults:
   contrast_threshold: 0.5
   time_window_ms: [50, 250]
+
+# Performance Tuning (New in v4GX)
+data_update_interval_ms: 100  # Fast data cache updates (milliseconds)
+display_update_interval_ms: 500  # Slower display rendering (milliseconds)
+psth_sync_interval_s: 1.0  # Batch sync to shared dict (seconds)
+
+# Processing Limits (New in v4GX)
+neural_process_max_iterations: 100  # Enhanced iterations per call (increased from 10)
+neural_process_time_budget_ms: 50  # Enhanced time budget per call (milliseconds, increased from 10)
+
+# Error Handling (New in v4GX)
+spikeglx_fetch_timeout_s: 2.0  # Fetch timeout for SpikeGLX (seconds)
+spikeglx_recovery_attempts: 3  # Recovery retry count
+spikeglx_health_check_s: 5.0  # Health check interval (seconds)
+
+# Optional Features (New in v4GX)
+use_numba_acceleration: true  # Enable Numba JIT compilation
+
+# Enhanced Monitoring Parameters (New in v4GX)
+queue_size_alert_threshold: 5000  # Queue size threshold for alerts
+queue_growth_alert_threshold: 100  # Queue growth rate threshold (items/second)
+processing_delay_alert_ms: 100  # Processing delay threshold (milliseconds)
+
+# Parallel Processing Configuration (New in v4GX)
+enable_parallel_processing: false  # Enable parallel neural processing
+num_parallel_processors: 4  # Number of parallel processor instances
+parallel_channel_groups: 4  # Number of channel groups for parallel processing
+
+# Fetch Parameters (New in v4GX)
+fetch_size_neural: 10000  # Neural data fetch size per batch
+fetch_size_ttl: 3531  # TTL data fetch size per batch
   
 # Performance Settings
 performance:
